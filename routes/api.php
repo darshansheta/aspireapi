@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoansController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,16 @@ use App\Http\Controllers\AuthController;
 
 
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 
-Route::middleware('dbtransaction')->group(function () {
-   Route::post('register', [AuthController::class, 'register'])->name('auth.register');
+Route::middleware([
+    'auth:sanctum',
+    'dbtransaction'
+])->group(function () {
+   Route::get('loans', [LoansController::class, 'index'])->name('loans.index');
+   Route::post('loans', [LoansController::class, 'store'])->name('loans.store');
+   Route::post('loans/{loan}/approve', [LoansController::class, 'approve'])->name('loans.approve');
+   Route::post('loans/{loan}/pay', [LoansController::class, 'pay'])->name('loans.pay');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
