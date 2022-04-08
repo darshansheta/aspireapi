@@ -24,13 +24,15 @@ class LoanRepayRequest extends FormRequest
      */
     public function rules()
     {
-        $loan        = $this->route('loan');
-        $loanService = resolve(LoanService::class);
+        $loan          = $this->route('loan');
+        $loanService   = resolve(LoanService::class);
+        $nextRepayment = $loanService->getNextScheduledRepayment($loan);
+        $minimumAmount = $nextRepayment ? $nextRepayment->amount - $nextRepayment->paid_amount : 0;
         return [
             'amount' => [
                 'required',
                 'numeric',
-                'min:0.01',
+                'min:'.$minimumAmount,
                 function ($attribute, $value, $fail) use ($loan, $loanService) {
                     $remainingAmount = $loan->remaining_amount;
 
