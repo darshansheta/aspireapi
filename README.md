@@ -27,7 +27,7 @@
 - User can register and login .
 - User can request loan with term and amount that user want , in system loan with status `pending` will be created.
 - User can see their list of loans and specific loan details.
-- Admin can approve a loan. On approval system will create repayments with status `unpaid` 
+- Admin can approve a loan. On approval system will create N number of repayments with status `unpaid`  where N is equal loan term.
 - After loan is approved user can repay loan
     - To repay loan , user mast pay on or before next scheduled time
     - amount must ve greater than or equal to next up coming repayment
