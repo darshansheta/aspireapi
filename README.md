@@ -1,5 +1,19 @@
 # Aspire API
 
+## Notes
+- This application is built using laravel 9 and PHP version 8.
+- API authentication is handled by Laravel sanctum
+- I have created `IsAdmin` middleware to handle admin APIs
+- To validate request I rely heavily on `FormRequest` class, so you will find all validation logic there
+- Used `Policy` class to handle authorization for Loan model
+- I prefer clean controller so I do not put application logic there instead I create a Service class (a pure class) that I always resolve using DI to use anywhere in application
+- My service class contains business logic and reusable functions
+- I also prefer to have separate layer for API resource, so for major case I use Laravel resources
+- Since I have user PHP 8 I tried to type hint argument and return type for major controller, models and service class. Also, I have used new `Enum` class for Loan and Repayment's status column
+- Since we have to deal with amount so keep it accurate I have used Money package to avoid rounding errors
+- I have created Feature testcases, Those covers all positive testcases and major negative testcases
+- As per code challenge, I am asked to use `pending` status for repayments model, but I found `unpaid` more meaning full, so I made choice there 
+
 ## Installation and setup guide
 - Clone repository using this command `git clone https://github.com/darshansheta/aspireapi.git`.
 - Install all dependencies via composer using following command `composer install`

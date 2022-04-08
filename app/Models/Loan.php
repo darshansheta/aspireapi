@@ -26,9 +26,7 @@ class Loan extends Model
             return $this->amount;
         }
 
-        return Money::USD( (int) $this->repayments->sum('amount') * 100 )
-            ->subtract(Money::USD( (int) $this->repayments->sum('paid_amount') * 100 ))
-            ->getAmount()/100;
+        return Money::USD( (int) (($this->repayments->sum('amount') - $this->repayments->sum('paid_amount')) * 100 ))->getAmount()/100;
     }
 
     public function getPaidAmountAttribute()

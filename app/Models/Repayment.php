@@ -26,6 +26,6 @@ class Repayment extends Model
 
     public function getUnpaidAmountAttribute()
     {
-        return Money::USD( (int) $this->amount*100)->subtract(Money::USD( (int) $this->paid_amount*100))->getAmount()/100;
+        return Money::USD( (int) ($this->amount - $this->paid_amount )*100)->getAmount()/100;
     }
 }
