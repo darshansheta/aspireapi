@@ -34,3 +34,8 @@
     - user can only maximum total remaining_amount which can be found in loan details
     - If user pay more than next repayment then remaining extra amount get credited in up coming repayment and that repayment will be marked as `partial_paid`
     - once all repayments are paid then automatically marked as `paid`
+
+
+## Following packages are used
+* `moneyphp/money` -  Money for PHP: To handle money related operation like, divid, calculate remaining and partial paid amount
+* `laravel/sanctum` - Laravel Sanctum: To handle api authentication
