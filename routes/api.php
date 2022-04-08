@@ -25,10 +25,10 @@ Route::middleware([
     'auth:sanctum',
     'dbtransaction'
 ])->group(function () {
-    Route::put('loans/{loan}/approve',  [LoansController::class, 'approve'])->name('loans.approve')->middleware('admin');
+    Route::post('loans',                [LoansController::class, 'store'])->name('loans.store');
     Route::get('loans',                 [LoansController::class, 'index'])->name('loans.index');
     Route::get('loans/{loan}',          [LoansController::class, 'show'])->name('loans.show')->can('view', 'loan');
-    Route::post('loans',                [LoansController::class, 'store'])->name('loans.store');
+    Route::put('loans/{loan}/approve',  [LoansController::class, 'approve'])->name('loans.approve')->middleware('admin');
     Route::post('loans/{loan}/repay',   [LoansController::class, 'repay'])->name('loans.repay')->can('update', 'loan');
 });
 
