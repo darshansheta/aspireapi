@@ -42,7 +42,7 @@ class AuthService
 
         return [
             'user'  => $user,
-            'token' => $user->createToken('aspire_app')->plainTextToken
+            'token' => $user->createToken(config('aspire.token_name'))->plainTextToken
         ];
     }
 

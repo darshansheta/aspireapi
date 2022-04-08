@@ -27,7 +27,7 @@ class LoanRepayRequest extends FormRequest
         $loan          = $this->route('loan');
         $loanService   = resolve(LoanService::class);
         $nextRepayment = $loanService->getNextScheduledRepayment($loan);
-        $minimumAmount = $nextRepayment ? $nextRepayment->amount - $nextRepayment->paid_amount : 0;
+        $minimumAmount = $nextRepayment->unpaid_amount ?? 0;
         return [
             'amount' => [
                 'required',
