@@ -15,7 +15,7 @@ class LoanApproveRequest extends FormRequest
      */
     public function authorize()
     {
-        return Loan::find($this->route('loan'));
+        return $this->route('loan');
     }
 
     /**
@@ -25,16 +25,21 @@ class LoanApproveRequest extends FormRequest
      */
     public function rules()
     {
-        $loan = Loan::find($this->route('loan'));
+        $loan = $this->route('loan');
+
         return [
-            'loan' => function ($attribute, $value, $fail) use ($loan) {
-                        if ($loan->status === LoanStatus::APPROVED) {
-                            $fail('This loan is already approved');
-                        }
-                        if ($loan->status !== LoanStatus::PENDING) {
-                            $fail('This loan cant be approved');
-                        }
-                    },
+            'approve' => [
+                'required',
+                'boolean',
+                function ($attribute, $value, $fail) use ($loan) {
+                    if ($loan->status === LoanStatus::APPROVED) {
+                        return $fail('This loan is already approved');
+                    }
+                    if ($loan->status !== LoanStatus::PENDING) {
+                        return $fail('This loan cant be approved');
+                    }
+                },
+            ]
         ];
     }
 }

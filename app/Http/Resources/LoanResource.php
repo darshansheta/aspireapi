@@ -16,9 +16,11 @@ class LoanResource extends JsonResource
     {
         return [
             'id'               => $this->id,
+            'user_id'          => $this->user_id,
             'term'             => $this->term,
             'amount'           => $this->amount,
             'status'           => $this->status,
+            'paymnet_status'   => $this->payment_status,
             'remaining_amount' => $this->remaining_amount,
             'paid_amount'      => $this->paid_amount,
             'repayments'       => RepaymentResource::collection($this->whenLoaded('repayments')),

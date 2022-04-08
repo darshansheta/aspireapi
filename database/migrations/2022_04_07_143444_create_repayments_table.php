@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('loan_id')->references('id')->on('loans')->onDelete('cascade');
             $table->decimal('amount', 10, 2);
             $table->decimal('paid_amount', 10, 2)->default(0);
-            $table->string('status')->nullable();
+            $table->string('status')->nullable()->index();
             $table->datetime('scheduled_at')->nullable();
             $table->datetime('paid_at')->nullable();
             $table->timestamps();

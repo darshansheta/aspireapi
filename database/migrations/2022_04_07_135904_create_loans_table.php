@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('term');
             $table->decimal('amount', 10, 2);
-            $table->string('status')->nullable();
+            $table->string('status')->nullable()->index();
             $table->datetime('started_at')->nullable();
             $table->timestamps();
         });

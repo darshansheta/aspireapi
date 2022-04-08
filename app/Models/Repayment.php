@@ -12,13 +12,14 @@ class Repayment extends Model
     use HasFactory;
 
     protected $casts = [
-        'status' => RepaymentStatus::class,
+        'status'     => RepaymentStatus::class,
+        'scheduled_at' => 'datetime',
     ];
     
     protected $guarded = ['id'];
 
     public function transactions(): BelongsToMany
     {
-        return $this->belongsToMany(Repayment::class);
+        return $this->belongsToMany(Transaction::class, RepaymentTransaction::class);
     }
 }
